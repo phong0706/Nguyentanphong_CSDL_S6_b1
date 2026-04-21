@@ -1,9 +1,11 @@
 SELECT 
-    restaurant_name, 
-    address, 
-    rating
+    city, 
+    SUM(total_price) AS revenue
 FROM 
-    Restaurants
+    Bookings
 WHERE 
-    district IN ('Quận 1', 'Quận 3')
-    AND rating > 4.0;
+    status = 'COMPLETED'
+GROUP BY 
+    city
+HAVING 
+    SUM(total_price) > 0;
